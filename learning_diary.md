@@ -1,6 +1,6 @@
 # Learning diary
 
-## day 3
+## day 3 - test python package version
 
 Testing python package versions is possible using the standard python package [distutils](https://docs.python.org/2.7/library/distutils.html):
 
