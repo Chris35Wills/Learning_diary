@@ -3,6 +3,8 @@ Quick pictoral walk through an FT of a 1D sine wave
 
 This has been modified from: https://plot.ly/matplotlib/fft/
 
+See also here: http://glowingpython.blogspot.co.uk/2011/08/how-to-plot-frequency-spectrum-with.html
+
 @author Chris
 @date 25/05/16
 """
@@ -40,6 +42,34 @@ plt.show(block=False)
 ofile="./combined_sine_wave.png"
 plt.tight_layout()
 plt.savefig(ofile, dpi=300, transparent=True)#, figsize= )
+
+
+ofile="./sine_wave_1.png"
+plt.plot(t,y)
+plt.ylim(-1.5, 1.5)
+#plt.show()
+plt.savefig(ofile, figsize=(3,1), dpi=300, transparent=True)
+plt.clf()
+
+ofile="./sine_wave_2.png"
+plt.plot(t,y2)
+plt.ylim(-1.5, 1.5)
+#plt.show()
+plt.savefig(ofile, figsize=(3,1), dpi=300, transparent=True)
+plt.clf()
+
+ofile="./combined_sine_wave.png"
+plt.plot(t,y3)
+plt.ylim(-1.5, 1.5)
+#plt.show()
+plt.savefig(ofile, figsize=(3,1), dpi=300, transparent=True)
+plt.clf()
+
+
+
+
+
+
 
 # calculate your frequencies
 n = len(y3) # length of the signal
