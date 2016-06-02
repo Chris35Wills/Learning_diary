@@ -33,7 +33,7 @@ You can then manipulate the result as required:
 	plt.title("Cumulative distance")
 	plt.show()
 
-![Cumulative distance]({{ site.baseurl }}/images/cumulative_distance.png)	
+![Cumulative distance]({{ site.baseurl }}../images/cumulative_distance.png)	
 
 ## day 4 - matplotlib and X11
 
