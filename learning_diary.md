@@ -1,6 +1,6 @@
 # Learning diary
 
-## day 4 - apply function over Pandas dataframe
+## day 5 - apply function over Pandas dataframe
 
 The [assign](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.assign.html) function available in [Pandas](http://pandas.pydata.org/) is extremely convenient and allows for quick calculations across a dataframe. I need to make more use of this. You create your dataframe such as:
 
