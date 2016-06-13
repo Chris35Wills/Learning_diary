@@ -56,9 +56,11 @@ Longitude max.: 12.526900
 
 To ensure I don't have any white space either side of these variable values, I can do a quick pipe of the variable into [xargs](http://linux.die.net/man/1/xargs) (careful using this pipe in this way for other applications):
 
+```
 datum=`echo $datum | xargs`
 flattening=`echo $flattening | xargs`
 half_axis=`echo $half_axis | xargs`
+```
 
 I can now set my proj4 string using the variables defined above:
 
