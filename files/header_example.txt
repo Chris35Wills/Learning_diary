@@ -1,0 +1,18 @@
+*** Header info for something cool... ***
+Survey ID: jr106_EastGreenlandshelf 
+Datum: WGS84 
+Half axis: 5432165.0000000 
+Flattening: 1/300.43 
+Coordinate system: Lat/Long 
+Latitude min.:  65.23145 
+Longitude min.: -3.543890 
+Latitude max.:  69.26 
+Longitude max.: 12.526900 
+Latitude cell size: 500.00 meter
+Longitude cell size: 432.50 meter
+Elevation values
+ 
+2.4696129 68.9045489 518.00 
+2.4701524 68.9045364 516.98 
+2.4700467 68.9045806 516.83 
+2.4699306 68.9046291 517.12 

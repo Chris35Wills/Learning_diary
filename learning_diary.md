@@ -1,5 +1,89 @@
 # Learning diary
 
+## day 6 - creating parameter files
+
+I often receive numerous files of survey data where the first few lines describe the coordinate system, with the remaining lines denoting position and attribute information e.g. x,y,z - an example of the top of such a file can be seen [here](./files/header_example.txt). The header format is not always that convenient when all I really want is access to a few values. To deal with this, I have a bash script that reads in the file, then using [gawk](https://www.gnu.org/software/gawk/manual/gawk.html) to pull out the information that is required, putting this into a new file which can be more easily handled down the processing chain. 
+
+Using our example file:
+
+```
+*** Header info for something cool... ***
+Survey ID: jr106_EastGreenlandshelf 
+Datum: WGS84 
+Half axis: 5432165.0000000 
+Flattening: 1/300.43 
+Coordinate system: Lat/Long 
+Latitude min.:  65.23145 
+Longitude min.: -3.543890 
+Latitude max.:  69.26 
+Longitude max.: 12.526900 
+Latitude cell size: 500.00 meter
+Longitude cell size: 432.50 meter
+Elevation values
+```
+
+Let's say I want to have access to the datum info, half axis value, the flattening value in order to create a [proj4 string](https://trac.osgeo.org/proj/) which I can the write out to a new file.
+
+First, in bash, I set my file (if you have many files, then start a loop):
+
+```
+f='./header_example.txt'
+echo "Working on $f" 
+```
+
+In this example, I already know the projection and ellipsoid info, so I can set variables accordingly:
+
+```
+proj="longlat"
+ellips="WGS84"
+```
+
+The datum, flattening and half axis info I can take fro the header_example.txt file, for which I can make ue of [gawk]():
+
+```
+datum=`gawk 'NR!=1{if($1 == "Datum") printf("%s\n", $2)}' FS=":" $f`
+flattening=`gawk 'NR!=1{if($1 == "Flattening") printf("%s\n", $2)}' FS=":" $f`
+half_axis=`gawk 'NR!=1{if($1 == "Half axis") printf("%s\n", $2)}' FS=":" $f`
+```
+
+So if you are new to gawk, there is a lot going on here. For the first call to set the `datum` variable, the call starts with a back tick followed by a call to `gawk` itself. The `NR!=1` call skips the first line. Within the curly braces, `if($1 == "Datum") printf("%s\n", $2)` states that if the first column is equal to the string `Datum`, then print the second column as a string followed by a new line. Outside the curly braces, `FS=":"` states that each field is separated by a colon. For example, for a given line such as:
+
+```
+Longitude max.: 12.526900 
+```
+
+... using  `FS=":"` means that the first column (`$1`) will be `Longitude max.` and the second column (`$2`) will be `12.526900`. The final call in the lines above to `$f` simple tells gawk which file to work on.
+
+To ensure I don't have any white space either side of these variable values, I can do a quick pipe of the variable into [xargs](http://linux.die.net/man/1/xargs) (careful using this pipe in this way for other applications):
+
+datum=`echo $datum | xargs`
+flattening=`echo $flattening | xargs`
+half_axis=`echo $half_axis | xargs`
+
+I can now set my proj4 string using the variables defined above:
+
+```
+proj4="+proj=$proj +ellps=$ellips +datum=$datum +f=$flattening +a=$half_axis"
+```
+
+Now, I can write the proj4 string variable to a new file:
+
+```
+echo $proj4 > example.hdr
+```
+
+This can be repeated for any other variables to, for example to get the longitude cell size:
+
+```
+lon_res = `gawk 'NR!=1{if($1 == "Longitude cell size") printf("%.2f \n", $2)}' FS=":" $f`
+```
+
+... and then to append this to the same file that we wrote the proj4 variable to:
+
+```
+echo $lon_res > example.hdr
+```
+
 ## day 5 - apply function over Pandas dataframe
 
 The [assign](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.assign.html) function available in [Pandas](http://pandas.pydata.org/) is extremely convenient and allows for quick calculations across a dataframe. I need to make more use of this. You create your dataframe such as:
