@@ -2,7 +2,7 @@
 
 ## day 7 - finally getting to grips with colorbars and equivalent space
 
-I want to make two plots of two equally sixed 2D arrays - one of which has a colorbar, the other not. I also want to ensure that both plots show the arrays at the same equivalent size. This requires the creation of a second axis on each subplot 
+I want to make two plots of two equally sized 2D arrays - one of which has a colorbar, the other not. I also want to ensure that both plots show the arrays at the same equivalent size. This requires the creation of a second axis on each sub-plot 
 
 So to walk this through, create data and a new figure:
 
@@ -47,12 +47,12 @@ cb = plt.colorbar(cax=cax)
 Now create the second subplot and display mask_array:
 
 ```python
-ax2=fig.add_subplot(212) # sets curent axis - can use plt calls to modify current axis
+ax2=fig.add_subplot(212) # sets current axis - can use plt calls to modify current axis
 
 plt.imshow(mask_arr, cmap='afmhot_r', extent=extent)
 ```
 
-We don't want a colour bar here but we need to create a new axis to ensure the main plot of this subplot is in the right place (and doesn't just fill the whole subplot area):
+We don't want a colour bar here but we need to create a new axis to ensure the main plot of this sub-plot is in the right place (and doesn't just fill the whole subplot area):
 
 ```python
 divider = make_axes_locatable(ax2)
