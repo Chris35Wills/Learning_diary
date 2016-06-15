@@ -75,7 +75,7 @@ then plot and boom:
 plt.show()
 ```
 
-![Cumulative distance](./images/colorbars_tobe_ornot.png.png)	
+![Cumulative distance](./images/colorbars_tobe_ornot.png)	
 
 ## day 6 - creating parameter files
 
