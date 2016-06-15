@@ -6,7 +6,7 @@ I want to make two plots of two equally sixed 2D arrays - one of which has a col
 
 So to walk this through, create data and a new figure:
 
-``python
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.axes_grid1 import make_axes_locatable
