@@ -75,7 +75,7 @@ then plot and boom:
 plt.show()
 ```
 
-![Cumulative distance]({{ site.baseurl }}images/colorbars_tobe_ornot.png.png)	
+![Cumulative distance]({{ site.baseurl }}../images/colorbars_tobe_ornot.png.png)	
 
 ## day 6 - creating parameter files
 
@@ -196,7 +196,7 @@ You can then manipulate the result as required:
 	plt.title("Cumulative distance")
 	plt.show()
 
-![Cumulative distance]({{ site.baseurl }}images/cumulative_distance.png)	
+![Cumulative distance]({{ site.baseurl }}../images/cumulative_distance.png)	
 
 ## day 4 - matplotlib and X11
 
