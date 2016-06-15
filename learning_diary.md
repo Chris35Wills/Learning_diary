@@ -1,5 +1,82 @@
 # Learning diary
 
+## day 7 - finally getting to grips with colorbars and equivalent space
+
+I want to make two plots of two equally sixed 2D arrays - one of which has a colorbar, the other not. I also want to ensure that both plots show the arrays at the same equivalent size. This requires the creation of a second axis on each subplot 
+
+So to walk this through, create data and a new figure:
+
+``python
+import matplotlib.pyplot as plt
+import numpy as np
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+#make data
+mask_arr=np.random.rand(100,100)
+distance=mask_arr*2
+extent=[0,100,0,100]
+
+#create figure
+fig=plt.figure()
+```
+
+Now create the first subplot and display the distance array:
+
+```python
+###############
+# plot distance
+ax=fig.add_subplot(211)
+
+plt.title("Colorbars - to be or not to be")
+plt.imshow(distance, extent=mask.extent)
+```
+
+Now create a new axis in which to put the colorbar (which is discussed [here](http://matplotlib.org/mpl_toolkits/axes_grid/users/overview.html#axesdivider)):
+
+```python
+divider = make_axes_locatable(ax)
+cax = divider.append_axes("right", size="5%", pad=0.1)
+```
+
+The colorbar for the current axis is now created:
+
+```python
+cb = plt.colorbar(cax=cax)
+```
+
+Now create the second subplot and display mask_array:
+
+```python
+ax2=fig.add_subplot(212) # sets curent axis - can use plt calls to modify current axis
+
+plt.imshow(mask_arr, cmap='afmhot_r', extent=extent)
+```
+
+We don't want a colour bar here but we need to create a new axis to ensure the main plot of this subplot is in the right place (and doesn't just fill the whole subplot area):
+
+```python
+divider = make_axes_locatable(ax2)
+cax = divider.append_axes("right", size="5%", pad=0.1)
+```
+
+As we don;t want a colorbar on this particular subaxis, make stuff on the new axis invisible:
+
+```python
+cax.set_axis_bgcolor('none')
+for axis in ['top','bottom','left','right']:
+    cax.spines[axis].set_linewidth(0)
+cax.set_xticks([])
+cax.set_yticks([])
+```
+
+then plot and boom:
+
+```python
+plt.show()
+```
+
+![Cumulative distance]({{ site.baseurl }}./images/colorbars_tobe_ornot.png.png)	
+
 ## day 6 - creating parameter files
 
 I often receive numerous files of survey data where the first few lines describe the coordinate system, with the remaining lines denoting position and attribute information e.g. x,y,z - an example of the top of such a file can be seen [here](./files/header_example.txt). The header format is not always that convenient when all I really want is access to a few values. To deal with this, I have a bash script that reads in the file, then using [gawk](https://www.gnu.org/software/gawk/manual/gawk.html) to pull out the information that is required, putting this into a new file which can be more easily handled down the processing chain. 
