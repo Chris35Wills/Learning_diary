@@ -75,7 +75,7 @@ then plot and boom:
 plt.show()
 ```
 
-![Cumulative distance]({{ site.baseurl }}./images/colorbars_tobe_ornot.png.png)	
+![Cumulative distance]({{ site.baseurl }}images/colorbars_tobe_ornot.png.png)	
 
 ## day 6 - creating parameter files
 
@@ -115,7 +115,7 @@ proj="longlat"
 ellips="WGS84"
 ```
 
-The datum, flattening and half axis info I can take fro the header_example.txt file, for which I can make ue of [gawk]():
+The datum, flattening and half axis info I can take fro the header_example.txt file, for which I can make ue of [gawk](https://www.gnu.org/software/gawk/):
 
 ```
 datum=`gawk 'NR!=1{if($1 == "Datum") printf("%s\n", $2)}' FS=":" $f`
@@ -196,7 +196,7 @@ You can then manipulate the result as required:
 	plt.title("Cumulative distance")
 	plt.show()
 
-![Cumulative distance]({{ site.baseurl }}./images/cumulative_distance.png)	
+![Cumulative distance]({{ site.baseurl }}images/cumulative_distance.png)	
 
 ## day 4 - matplotlib and X11
 
